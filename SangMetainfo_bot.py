@@ -6,7 +6,13 @@ from datetime import datetime, timedelta
 from telegram import Update,KeyboardButton,ReplyKeyboardMarkup
 from telegram.ext import Updater, CommandHandler,CallbackContext, MessageHandler,Filters
 import os
-PORT = int(os.environ.get('PORT','8443'))
+ON_HEROKU = os.environ.get('ON_HEROKU')
+
+if ON_HEROKU:
+    # get the heroku port
+    port = int(os.environ.get('PORT', 17995))  # as per OP comments default is 17995
+else:
+    port = 3000
 TOKEN = os.environ.get('BOT_TOKEN',None)
 HEROKU_APP_NAME=os.environ.get('HEROKU_APP_NAME',None)
 owner=os.environ.get('OWNER',None)
