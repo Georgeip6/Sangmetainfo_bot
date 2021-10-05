@@ -45,7 +45,7 @@ dispatcher= updater.dispatcher
 #############################№##################################№#
 def start(update,context):
   logg(update.message)
-  update.message.reply_text("Forward any message to this chat to see user history.")
+  update.message.reply_text("حول أي رسالة ياقلبي للبوت لتشوف تاريخو ع التيليجرام🥺")
 #############################№##################################№#
 
 
@@ -57,8 +57,8 @@ def Forwarded(update, context):
   if "forward_from" in message.to_dict():
     user=message.forward_from
     message.reply_text(f"""
-Name History
-👤 {user.id}
+السجل التاريخي للمستخدم
+🤦🏻‍♂️ {user.id}
 
 1. [{ran_date()}] {user.full_name}
 """)
@@ -76,8 +76,8 @@ def search_id(update,context):
     id_search=int(text.split(" ")[1])
     user=context.bot.getChat(id_search)
     message.reply_text(f"""
-Name History
-👤 {user.id}
+السجل التاريخي للمستخدم
+🤦🏻‍♂️ {user.id}
 
 1. [{ran_date()}] {user.full_name}
 """)
