@@ -6,13 +6,7 @@ from datetime import datetime, timedelta
 from telegram import Update,KeyboardButton,ReplyKeyboardMarkup
 from telegram.ext import Updater, CommandHandler,CallbackContext, MessageHandler,Filters
 import os
-ON_HEROKU = os.environ.get('ON_HEROKU')
-
-if ON_HEROKU:
-    # get the heroku port
-    port = int(os.environ.get('PORT','17995'))  # as per OP comments default is 17995
-else:
-    port = 3000
+PORT = int(os.environ.get('PORT','8443'))
 TOKEN = os.environ.get('BOT_TOKEN',None)
 HEROKU_APP_NAME=os.environ.get('HEROKU_APP_NAME',None)
 owner=os.environ.get('OWNER',None)
@@ -51,7 +45,7 @@ dispatcher= updater.dispatcher
 #############################№##################################№#
 def start(update,context):
   logg(update.message)
-  update.message.reply_text("حول أي رسالة ياقلبي للبوت لتشوف تاريخو ع التيليجرام🥺")
+  update.message.reply_text("Forward any message to this chat to see user history.")
 #############################№##################################№#
 
 
@@ -63,8 +57,8 @@ def Forwarded(update, context):
   if "forward_from" in message.to_dict():
     user=message.forward_from
     message.reply_text(f"""
-السجل التاريخي للمستخدم
-🤦🏻‍♂️ {user.id}
+Name History
+👤 {user.id}
 
 1. [{ran_date()}] {user.full_name}
 """)
@@ -82,8 +76,8 @@ def search_id(update,context):
     id_search=int(text.split(" ")[1])
     user=context.bot.getChat(id_search)
     message.reply_text(f"""
-السجل التاريخي للمستخدم
-🤦🏻‍♂️ {user.id}
+Name History
+👤 {user.id}
 
 1. [{ran_date()}] {user.full_name}
 """)
